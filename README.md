@@ -1,6 +1,6 @@
 # flutter_notes_app
 
-A new Flutter project.
+A simple notes app for practising/showcasing purposes, written in Flutter
 
 ## Getting Started
 
