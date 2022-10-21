@@ -16,6 +16,7 @@ class AddNoteScreen extends StatelessWidget {
         title: const Text('Add note'),
         actions: [
           TextButton(
+            key: const Key('save_button'),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -31,6 +32,7 @@ class AddNoteScreen extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              key: const Key('note_text_field'),
               minLines: 3,
               maxLines: null,
             ),

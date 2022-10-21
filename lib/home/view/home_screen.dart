@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
                   ' Suspendisse egestas malesuada risus a lobortis. '
                   'Nullam mollis vehicula sem, sed mollis neque'
                   ' dignissim eget. Nullam lacinia id leo nec semper.',
+                  key: Key('note_body'),
                 ),
                 SizedBox(height: 4),
                 Text('Created: 2022-10-12, 12:04', textAlign: TextAlign.right),
