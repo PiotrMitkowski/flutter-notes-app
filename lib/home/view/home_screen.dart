@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/view/add_note_screen.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/home/bloc/notes_list_bloc.dart';
-import 'package:flutter_notes_app/home/widgets/notes_list_item.dart';
+import 'package:flutter_notes_app/home/widgets/notes_list_view.dart';
 import 'package:flutter_notes_app/l10n/l10n.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,21 +36,9 @@ class HomeView extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: BlocBuilder<NotesListBloc, NotesListState>(
-          builder: (context, state) => ListView.separated(
-            itemCount: state.notes.length,
-            separatorBuilder: (context, index) => const Divider(
-              height: 1,
-              thickness: 2,
-            ),
-            itemBuilder: (context, index) {
-              final note = state.notes[index];
-              return NotesListItem(note: note);
-            },
-          ),
-        ),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: NotesListView(),
       ),
     );
   }
