@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/bloc/add_note_bloc.dart';
+import 'package:flutter_notes_app/add_note/widgets/note_field.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 
 class AddNoteScreen extends StatefulWidget {
@@ -55,23 +56,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              children: [
-                TextFormField(
-                  key: const Key('note_text_field'),
-                  minLines: 3,
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter note';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    context
-                        .read<AddNoteBloc>()
-                        .add(AddNoteContentChanged(value));
-                  },
-                ),
+              children: const [
+                NoteField(),
               ],
             ),
           ),
