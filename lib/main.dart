@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/home/view/home_screen.dart';
+import 'package:flutter_notes_app/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget {
       value: notesRepository,
       child: MaterialApp(
         title: 'Notes app',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: appTheme(),
         home: const HomeScreen(),
       ),
     );

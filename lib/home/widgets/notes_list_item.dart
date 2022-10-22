@@ -14,19 +14,25 @@ class NotesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          note.content,
-          key: const Key('note_body'),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          'Created: ${_formatCreationDate(note.creationDate)}',
-          textAlign: TextAlign.right,
-        ),
-      ],
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            note.content,
+            key: const Key('note_body'),
+            style: theme.textTheme.headline1,
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Created: ${_formatCreationDate(note.creationDate)}',
+            textAlign: TextAlign.right,
+            style: theme.textTheme.subtitle1,
+          ),
+        ],
+      ),
     );
   }
 }
