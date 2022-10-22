@@ -15,13 +15,13 @@ class HomeScreen extends StatelessWidget {
       create: (context) => NotesListBloc(
         context.read<NotesRepository>(),
       )..add(NotesListRequested()),
-      child: const HomeView(),
+      child: const _HomeView(),
     );
   }
 }
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class _HomeView extends StatelessWidget {
+  const _HomeView();
 
   @override
   Widget build(BuildContext context) {
