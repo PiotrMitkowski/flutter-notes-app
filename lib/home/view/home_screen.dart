@@ -4,6 +4,7 @@ import 'package:flutter_notes_app/add_note/view/add_note_screen.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/home/bloc/notes_list_bloc.dart';
 import 'package:flutter_notes_app/home/widgets/notes_list_item.dart';
+import 'package:flutter_notes_app/l10n/l10n.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,9 +25,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notes'),
+        title: Text(labels.homeScreenTitle),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/home/view/home_screen.dart';
 import 'package:flutter_notes_app/styles.dart';
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
         title: 'Notes app',
         theme: appTheme(),
         home: const HomeScreen(),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
       ),
     );
   }

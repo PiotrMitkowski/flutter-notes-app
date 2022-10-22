@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/bloc/add_note_bloc.dart';
 import 'package:flutter_notes_app/add_note/widgets/note_field.dart';
 import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/l10n/l10n.dart';
 
 class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({super.key});
@@ -27,6 +28,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final labels = context.l10n;
     return BlocListener<AddNoteBloc, AddNoteState>(
       listenWhen: (previous, current) =>
           previous.status != current.status &&
@@ -34,7 +36,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       listener: (context, state) => Navigator.pop(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add note'),
+          title: Text(labels.addNoteScreenTitle),
           actions: [
             TextButton(
               key: const Key('save_button'),
@@ -44,9 +46,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   context.read<AddNoteBloc>().add(const AddNoteSubmitted());
                 }
               },
-              child: const Text(
-                'SAVE',
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                labels.saveButtonTitle,
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ],
@@ -55,11 +57,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
             key: _formKey,
-            child: Column(
-              children: const [
-                NoteField(),
-              ],
-            ),
+            child: const NoteField(),
           ),
         ),
       ),
