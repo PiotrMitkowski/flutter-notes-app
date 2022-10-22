@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/view/add_note_screen.dart';
+import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/home/bloc/notes_list_bloc.dart';
+import 'package:flutter_notes_app/home/widgets/notes_list_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => NotesListBloc(
+        context.read<NotesRepository>(),
+      )..add(NotesListRequested()),
+      child: const HomeView(),
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +36,18 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                  ' Suspendisse egestas malesuada risus a lobortis. '
-                  'Nullam mollis vehicula sem, sed mollis neque'
-                  ' dignissim eget. Nullam lacinia id leo nec semper.',
-                  key: Key('note_body'),
-                ),
-                SizedBox(height: 4),
-                Text('Created: 2022-10-12, 12:04', textAlign: TextAlign.right),
-              ],
-            )
-          ],
+        child: BlocBuilder<NotesListBloc, NotesListState>(
+          builder: (context, state) => ListView.separated(
+            itemCount: state.notes.length,
+            separatorBuilder: (context, index) => const Divider(
+              height: 1,
+              thickness: 2,
+            ),
+            itemBuilder: (context, index) {
+              final note = state.notes[index];
+              return NotesListItem(note: note);
+            },
+          ),
         ),
       ),
     );
