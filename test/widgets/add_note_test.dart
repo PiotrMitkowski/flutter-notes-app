@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Correctly adds note', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    final notesRepository = NotesRepository();
+    await notesRepository.initialize();
+    await tester.pumpWidget(
+      MyApp(
+        notesRepository: notesRepository,
+      ),
+    );
     await tester.pumpAndSettle();
 
     final fabFinder = find.byType(FloatingActionButton);
