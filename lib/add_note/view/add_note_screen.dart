@@ -6,8 +6,8 @@ import 'package:flutter_notes_app/add_note/widgets/save_note_button.dart';
 import 'package:flutter_notes_app/data/repository.dart';
 import 'package:flutter_notes_app/l10n/l10n.dart';
 
-class AddNoteScreen extends StatefulWidget {
-  const AddNoteScreen({super.key});
+class AddNoteScreen extends StatelessWidget {
+  AddNoteScreen({super.key});
 
   static Route<void> route() {
     return MaterialPageRoute(
@@ -15,16 +15,11 @@ class AddNoteScreen extends StatefulWidget {
         create: (context) => AddNoteBloc(
           context.read<NotesRepository>(),
         ),
-        child: const AddNoteScreen(),
+        child: AddNoteScreen(),
       ),
     );
   }
 
-  @override
-  State<AddNoteScreen> createState() => _AddNoteScreenState();
-}
-
-class _AddNoteScreenState extends State<AddNoteScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override

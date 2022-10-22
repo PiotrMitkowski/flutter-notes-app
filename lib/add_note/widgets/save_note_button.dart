@@ -14,18 +14,28 @@ class SaveNoteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = context.l10n;
-    return TextButton(
-      key: const Key('save_button'),
-      onPressed: () {
-        final isValid = form.validate();
-        if (isValid) {
-          context.read<AddNoteBloc>().add(const AddNoteSubmitted());
+    return BlocBuilder<AddNoteBloc, AddNoteState>(
+      builder: (context, state) {
+        if (state.status == AddNoteStatus.loading) {
+          return const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          );
         }
+
+        return TextButton(
+          key: const Key('save_button'),
+          onPressed: () {
+            final isValid = form.validate();
+            if (isValid) {
+              context.read<AddNoteBloc>().add(const AddNoteSubmitted());
+            }
+          },
+          child: Text(
+            labels.saveButtonTitle,
+            style: const TextStyle(color: Colors.white),
+          ),
+        );
       },
-      child: Text(
-        labels.saveButtonTitle,
-        style: const TextStyle(color: Colors.white),
-      ),
     );
   }
 }
