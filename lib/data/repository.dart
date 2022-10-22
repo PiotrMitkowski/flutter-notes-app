@@ -24,6 +24,8 @@ class NotesRepository {
   }
 
   Future<void> saveNote(Note note) async {
+    // added for testing purposes to notice the loading state
+    await Future<void>.delayed(const Duration(seconds: 2));
     await _isar.writeTxn((isar) async {
       await isar.notes.put(note);
     });
