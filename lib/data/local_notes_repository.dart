@@ -23,7 +23,7 @@ class LocalNotesRepository extends NotesRepository {
   @override
   Future<void> saveNote(Note note) async {
     final isar = await _isar;
-    // added for testing purposes to notice the loading state
+    // added for testing purposes to show the loading state
     await Future<void>.delayed(const Duration(seconds: 2));
     await isar.writeTxn((isar) async {
       await isar.notes.put(note);

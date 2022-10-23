@@ -59,7 +59,9 @@ class _AddNoteView extends StatelessWidget {
       appBar: AppBar(
         title: Text(labels.addNoteScreenTitle),
         actions: [
-          SaveNoteButton(form: _formKey.currentState!),
+          SaveNoteButton(
+            validateForm: () => _formKey.currentState!.validate(),
+          ),
         ],
       ),
       body: Padding(

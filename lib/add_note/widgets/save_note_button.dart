@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/bloc/add_note_bloc.dart';
+import 'package:flutter_notes_app/add_note/widgets/loading_indicator.dart';
 import 'package:flutter_notes_app/l10n/l10n.dart';
 
 class SaveNoteButton extends StatelessWidget {
   const SaveNoteButton({
     super.key,
-    required this.form,
+    required this.validateForm,
   });
 
-  final FormState form;
+  final bool Function() validateForm;
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +18,13 @@ class SaveNoteButton extends StatelessWidget {
     return BlocBuilder<AddNoteBloc, AddNoteState>(
       builder: (context, state) {
         if (state.status == AddNoteStatus.loading) {
-          return const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          );
+          return const LoadingIndicator();
         }
 
         return TextButton(
           key: const Key('save_button'),
           onPressed: () {
-            final isValid = form.validate();
+            final isValid = validateForm();
             if (isValid) {
               context.read<AddNoteBloc>().add(const AddNoteSubmitted());
             }
