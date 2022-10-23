@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_notes_app/data/models/note.dart';
-import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/data/data.dart';
 
 part 'add_note_state.dart';
 

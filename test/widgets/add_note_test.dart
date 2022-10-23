@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/data/data.dart';
 import 'package:flutter_notes_app/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Correctly adds note', (tester) async {
-    final notesRepository = NotesRepository();
+    final notesRepository = LocalNotesRepository();
     await tester.pumpWidget(
       MyApp(
         notesRepository: notesRepository,

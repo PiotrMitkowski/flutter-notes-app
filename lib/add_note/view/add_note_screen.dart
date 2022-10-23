@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes_app/add_note/bloc/add_note_bloc.dart';
 import 'package:flutter_notes_app/add_note/widgets/note_field.dart';
 import 'package:flutter_notes_app/add_note/widgets/save_note_button.dart';
-import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/data/data.dart';
 import 'package:flutter_notes_app/l10n/l10n.dart';
 
 class AddNoteScreen extends StatelessWidget {

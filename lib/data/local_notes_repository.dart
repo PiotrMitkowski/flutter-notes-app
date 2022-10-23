@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_notes_app/data/models/note.dart';
+import 'package:flutter_notes_app/data/data.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-class NotesRepository {
-  NotesRepository() {
+class LocalNotesRepository extends NotesRepository {
+  LocalNotesRepository() {
     _isar = _openDb();
   }
 
   late Future<Isar> _isar;
 
+  @override
   Stream<List<Note>> getNotes() async* {
     final isar = await _isar;
     yield* isar.notes
@@ -19,6 +20,7 @@ class NotesRepository {
         .watch(initialReturn: true);
   }
 
+  @override
   Future<void> saveNote(Note note) async {
     final isar = await _isar;
     // added for testing purposes to notice the loading state

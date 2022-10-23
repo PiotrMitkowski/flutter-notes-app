@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_notes_app/data/repository.dart';
+import 'package:flutter_notes_app/data/data.dart';
 import 'package:flutter_notes_app/home/view/home_screen.dart';
 import 'package:flutter_notes_app/l10n/l10n.dart';
 import 'package:flutter_notes_app/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final notesRepository = NotesRepository();
+  final notesRepository = LocalNotesRepository();
 
   runApp(
     MyApp(notesRepository: notesRepository),
