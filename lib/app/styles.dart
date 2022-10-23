@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+part of 'app.dart';
 
-ThemeData appTheme() {
+ThemeData _appTheme() {
   return ThemeData(
     primarySwatch: Colors.deepPurple,
     textTheme: const TextTheme(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notes_app/app/app.dart';
 import 'package:flutter_notes_app/data/data.dart';
 import 'package:flutter_notes_app/data/local_notes_repository.dart';
 import 'package:flutter_notes_app/home/view/home_screen.dart';
-import 'package:flutter_notes_app/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Correctly loads home screen without notes', (tester) async {
     final notesRepository = LocalNotesRepository();
     await tester.pumpWidget(
-      MyApp(
+      App(
         notesRepository: notesRepository,
       ),
     );
