@@ -4,19 +4,15 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
 class NotesRepository {
-  late Isar _isar;
-
-  Future<void> initialize() async {
-    final supportDirectory = await getApplicationSupportDirectory();
-    _isar = await Isar.open(
-      schemas: [NoteSchema],
-      directory: supportDirectory.path,
-      inspector: kDebugMode,
-    );
+  NotesRepository() {
+    _isar = _openDb();
   }
 
-  Stream<List<Note>> getNotes() {
-    return _isar.notes
+  late Future<Isar> _isar;
+
+  Stream<List<Note>> getNotes() async* {
+    final isar = await _isar;
+    yield* isar.notes
         .where()
         .sortByCreationDateDesc()
         .build()
@@ -24,10 +20,23 @@ class NotesRepository {
   }
 
   Future<void> saveNote(Note note) async {
+    final isar = await _isar;
     // added for testing purposes to notice the loading state
     await Future<void>.delayed(const Duration(seconds: 2));
-    await _isar.writeTxn((isar) async {
+    await isar.writeTxn((isar) async {
       await isar.notes.put(note);
     });
+  }
+
+  Future<Isar> _openDb() async {
+    final supportDirectory = await getApplicationSupportDirectory();
+    if (Isar.instanceNames.isEmpty) {
+      return Isar.open(
+        schemas: [NoteSchema],
+        directory: supportDirectory.path,
+        inspector: kDebugMode,
+      );
+    }
+    return Future.value(Isar.getInstance());
   }
 }

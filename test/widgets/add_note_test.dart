@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Correctly adds note', (tester) async {
     final notesRepository = NotesRepository();
-    await notesRepository.initialize();
     await tester.pumpWidget(
       MyApp(
         notesRepository: notesRepository,

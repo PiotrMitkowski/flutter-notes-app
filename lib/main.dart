@@ -9,7 +9,6 @@ import 'package:flutter_notes_app/styles.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final notesRepository = NotesRepository();
-  await notesRepository.initialize();
 
   runApp(
     MyApp(notesRepository: notesRepository),
