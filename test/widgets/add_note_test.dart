@@ -1,11 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_notes_app/app/app.dart';
 import 'package:flutter_notes_app/data/data.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
+import 'add_note_test.mocks.dart';
+
+@GenerateMocks([NotesRepository])
 void main() {
   testWidgets('Correctly adds note', (tester) async {
-    final notesRepository = LocalNotesRepository();
+    final streamController = StreamController<List<Note>>();
+    final notesRepository = MockNotesRepository();
+    when(notesRepository.getNotes()).thenAnswer((_) => streamController.stream);
+    when(notesRepository.saveNote(any)).thenAnswer((realInvocation) async {
+      final addedNote = realInvocation.positionalArguments[0] as Note;
+      streamController.add([addedNote]);
+    });
+
     await tester.pumpWidget(
       App(
         notesRepository: notesRepository,
